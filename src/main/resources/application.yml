@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  servlet:
+    context-path: wechatdemo1
+
+wechat:
+  appId: ww164a24f6c9e8898b
+  appsecret: Gm_pKaYPxNHfNXj3TiwzCPkF55Y4yLlo8kykSh0OK7E
+  accessTokenUrl: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+  spNoListUrl: https://qyapi.weixin.qq.com/cgi-bin/oa/getapprovalinfo
+  dataUrl: https://qyapi.weixin.qq.com/cgi-bin/oa/getapprovaldetail

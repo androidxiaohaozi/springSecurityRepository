@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.demo1.wechatdemo.mapper.ApprovalTokenDataPo">
+  <resultMap id="BaseResultMap" type="com.wechat.demo1.wechatdemo.po.ApprovalTokenData">
+    <id column="sp_no" jdbcType="VARCHAR" property="sp_no" />
+    <result column="sp_name" jdbcType="VARCHAR" property="sp_name" />
+    <result column="apply_time" jdbcType="TIMESTAMP" property="apply_time" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+    <result column="new_money" jdbcType="DOUBLE" property="new_money" />
+    <result column="cost_type" jdbcType="VARCHAR" property="cost_type" />
+    <result column="sp_status" jdbcType="INTEGER" property="sp_status" />
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="valid" jdbcType="INTEGER" property="valid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sp_no, sp_name, apply_time, user_id, new_money, cost_type, sp_status, id, valid, 
+    create_time, creater, update_time, updater
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from approval_token_data
+    where sp_no = #{sp_no,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from approval_token_data
+    where sp_no = #{sp_no,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wechat.demo1.wechatdemo.po.ApprovalTokenData">
+    insert into approval_token_data (sp_no, sp_name, apply_time, 
+      user_id, new_money, cost_type, 
+      sp_status, id, valid, 
+      create_time, creater, update_time, 
+      updater)
+    values (#{sp_no,jdbcType=VARCHAR}, #{sp_name,jdbcType=VARCHAR}, #{apply_time,jdbcType=TIMESTAMP}, 
+      #{user_id,jdbcType=VARCHAR}, #{new_money,jdbcType=DOUBLE}, #{cost_type,jdbcType=VARCHAR}, 
+      #{sp_status,jdbcType=INTEGER}, #{id,jdbcType=BIGINT}, #{valid,jdbcType=INTEGER}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{update_time,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wechat.demo1.wechatdemo.po.ApprovalTokenData">
+    insert into approval_token_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sp_no != null">
+        sp_no,
+      </if>
+      <if test="sp_name != null">
+        sp_name,
+      </if>
+      <if test="apply_time != null">
+        apply_time,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="new_money != null">
+        new_money,
+      </if>
+      <if test="cost_type != null">
+        cost_type,
+      </if>
+      <if test="sp_status != null">
+        sp_status,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sp_no != null">
+        #{sp_no,jdbcType=VARCHAR},
+      </if>
+      <if test="sp_name != null">
+        #{sp_name,jdbcType=VARCHAR},
+      </if>
+      <if test="apply_time != null">
+        #{apply_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="new_money != null">
+        #{new_money,jdbcType=DOUBLE},
+      </if>
+      <if test="cost_type != null">
+        #{cost_type,jdbcType=VARCHAR},
+      </if>
+      <if test="sp_status != null">
+        #{sp_status,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.demo1.wechatdemo.po.ApprovalTokenData">
+    update approval_token_data
+    <set>
+      <if test="sp_name != null">
+        sp_name = #{sp_name,jdbcType=VARCHAR},
+      </if>
+      <if test="apply_time != null">
+        apply_time = #{apply_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="new_money != null">
+        new_money = #{new_money,jdbcType=DOUBLE},
+      </if>
+      <if test="cost_type != null">
+        cost_type = #{cost_type,jdbcType=VARCHAR},
+      </if>
+      <if test="sp_status != null">
+        sp_status = #{sp_status,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sp_no = #{sp_no,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wechat.demo1.wechatdemo.po.ApprovalTokenData">
+    update approval_token_data
+    set sp_name = #{sp_name,jdbcType=VARCHAR},
+      apply_time = #{apply_time,jdbcType=TIMESTAMP},
+      user_id = #{user_id,jdbcType=VARCHAR},
+      new_money = #{new_money,jdbcType=DOUBLE},
+      cost_type = #{cost_type,jdbcType=VARCHAR},
+      sp_status = #{sp_status,jdbcType=INTEGER},
+      id = #{id,jdbcType=BIGINT},
+      valid = #{valid,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR}
+    where sp_no = #{sp_no,jdbcType=VARCHAR}
+  </update>
+</mapper>
