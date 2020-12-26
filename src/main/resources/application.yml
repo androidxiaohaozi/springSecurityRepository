@@ -1,7 +1,44 @@
 server:
   port: 8080
+
+spring:
+  application:
+    name: securitydemo
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/testspringsecuritydb?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      username: root
+      password: 609106
+  main:
+    allow-bean-definition-overriding: true
   servlet:
-    context-path: wechatdemo1
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    lettuce:
+      pool:
+        max-wait: -1
+        max-idle: 8
+        max-active: 8
+        min-idle: 0
+mybatis:
+  mapper-locations:
+    - classpath:mybatis/**/*.xml
+pagehelper:
+  #  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+  # 默认false,当为true时，自动检验适合的数据库
+  auto-dialect: true
+  # 这个一定要加上，不然mysql和oracle分页两个只能用一个，另一个会报错，加上后，两中数据库分页都可以用了
+  auto-runtime-dialect: true
+
 
 wechat:
   appId: ww164a24f6c9e8898b
