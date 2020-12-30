@@ -1,7 +1,5 @@
 server:
   port: 8080
-  servlet:
-    context-path: wechatdemo1
 
 wechat:
   appId: ww164a24f6c9e8898b
@@ -9,3 +7,10 @@ wechat:
   accessTokenUrl: https://qyapi.weixin.qq.com/cgi-bin/gettoken
   spNoListUrl: https://qyapi.weixin.qq.com/cgi-bin/oa/getapprovalinfo
   dataUrl: https://qyapi.weixin.qq.com/cgi-bin/oa/getapprovaldetail
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/mysqlDb?characterEncoding=utf-8
+      username: root
+      password: 123456
