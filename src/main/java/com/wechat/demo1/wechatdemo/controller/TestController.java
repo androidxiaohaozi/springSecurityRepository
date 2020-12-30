@@ -1,4 +1,4 @@
-package com.wechat.demo1.wechatdemo.Controller;
+package com.wechat.demo1.wechatdemo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
