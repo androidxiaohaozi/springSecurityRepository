@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @SpringBootApplication
 @MapperScan("com.wechat.demo1.wechatdemo.mapper")
-@EnableGlobalMethodSecurity(securedEnabled=true)
+@EnableGlobalMethodSecurity(securedEnabled=true,prePostEnabled = true)
 public class WechatDemoApplication {
 
     public static void main(String[] args) {

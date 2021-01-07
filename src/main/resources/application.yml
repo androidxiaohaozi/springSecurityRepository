@@ -14,7 +14,7 @@ spring:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/testspringsecurity1?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
       username: root
-      password: 609160
+      password: Wh@123456.
       driver-class-name: com.mysql.cj.jdbc.Driver
 #spring:
 #  datasource:
