@@ -37,7 +37,7 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl("/user/login")  //登陆访问的路径,controller不需要自己写，springsecurity处理过程。
             .defaultSuccessUrl("/test/index").permitAll()              //认证成功之后调转的路径
             .and().authorizeRequests()
-                .antMatchers("/","/test/hello","/user/login").permitAll()//设置哪些不需要登陆验证。
+                .antMatchers("/","/test/hello","/user/login","/K3WebApi").permitAll()//设置哪些不需要登陆验证。
                 //当前登陆用户，只有具有admins权限才可以访问这个路径
                 //第一种：hasAuthority方法
                 //.antMatchers("/test/index").hasAuthority("admins")
@@ -49,6 +49,5 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/test/index").hasAnyRole("sale");
             .anyRequest().authenticated()
             .and().csrf().disable();    //关闭csrf防护
-
     }
 }

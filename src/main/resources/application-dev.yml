@@ -1,0 +1,85 @@
+server:
+  port: 8888
+
+# 上线日期
+OnlineDate: 2021
+
+
+#*测试环境*
+# k3web对接获取捐赠明细接口
+SyncGetDonListURL: http://47.103.144.83/K3WebAPI/DonationService/GetDonList
+# k3web对接获取捐赠明细接口
+SyncGetInvoiceURL: http://47.103.144.83/K3WebAPI/DonationService/CreateInvoiceApp
+
+
+spring:
+  application:
+    name: cihong
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/testspringsecurity1?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      username: root
+      password: 609160
+  http-pool:
+    # 连接池最大连接数
+    max-total: 1000
+    # 每个rount请求的最大连接数
+    default-max-per-route: 1000
+    # 空闲多长时间（毫秒）来校验连接的有效性
+    validate-after-inactivity: 2000
+    # 建立连接的最大超时时间（毫秒）
+    connect-timeout: 5000
+    # 获取连接的最大超时时间（毫秒）
+    connection-request-timeout: 5000
+    # 与服务端保持连接的最大时间（毫秒）
+    socket-timeout: 5000
+    #提交请求前测试连接是否可用
+    stale-Connection-CheckEnabled: true
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 150MB
+#mybatis:
+#  mapper-locations:
+#    - classpath:mybatis/**/*.xml
+pagehelper:
+  #  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+  # 默认false,当为true时，自动检验适合的数据库
+  auto-dialect: true
+  # 这个一定要加上，不然mysql和oracle分页两个只能用一个，另一个会报错，加上后，两中数据库分页都可以用了
+  auto-runtime-dialect: true
+#minio图片服务器
+minio:
+  ## 以下仅仅本机测试,项目中不同文件肯定肯定存放的位置不一样，所以bocket（桶名也是不固定的）
+  url: http://172.10.8.239:9000 #测试环境
+  accessKey: minioadmin
+  secretKey: minioadmin
+  redadPath: /root/minio/data/img/  #读取文件的路径，需要根据配置自己配
+  addBucket: file #minio桶
+  officalUrl: http://test2.delongsteel.cn # 测试环境
+logging:
+  level:
+    com.dl.cihong.mapper: debug
+k3WebApi:
+  url: http://192.168.8.121:8888
+
+#微信公众号配置
+cihong:
+  teacherTemplate: 老师模板
+  professorTemplate: 专家模板
+  cihongTemplate: 管理员模板
+  schoolContentTemplate: 学校联系人模板
+  schoolContentSumTemplate: 学校联系人总结模板
+  url: http://pzz998.natappfree.cc/#/pages/index/index
+  wechat:
+    appid: wx5644fe57e898fa34
+    secret: 565031e48e5c2ddbc605a09f4757ba8b
+  qywxjqr: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6503e268-ed73-4a57-97df-cc2772c184c5 # 开发环境 企业微信机器人
