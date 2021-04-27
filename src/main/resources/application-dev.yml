@@ -7,9 +7,9 @@ OnlineDate: 2021
 
 #*测试环境*
 # k3web对接获取捐赠明细接口
-SyncGetDonListURL: http://47.103.144.83/K3WebAPI/DonationService/GetDonList
-# k3web对接获取捐赠明细接口
-SyncGetInvoiceURL: http://47.103.144.83/K3WebAPI/DonationService/CreateInvoiceApp
+SyncGetDonListURL: http://172.30.6.20/K3WebAPITest/DonationService/GetDonList
+# k3web对接开票申请接口
+SyncGetInvoiceURL: http://172.30.6.20/K3WebAPITest/DonationService/CreateInvoiceApp
 
 
 spring:

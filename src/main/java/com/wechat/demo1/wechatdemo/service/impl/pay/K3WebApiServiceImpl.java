@@ -8,6 +8,7 @@ import com.wechat.demo1.wechatdemo.utils.AesEncryptUtil;
 import com.wechat.demo1.wechatdemo.utils.ResultBean;
 import com.wechat.demo1.wechatdemo.vo.pay.DonListVo;
 import com.wechat.demo1.wechatdemo.vo.pay.InvoiceAppVo;
+import com.wechat.demo1.wechatdemo.vo.pay.InvoiceDonlistVo;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
-import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Description TODO
@@ -61,16 +62,16 @@ public class K3WebApiServiceImpl implements K3WebApiService {
         donListVo.setTimestamp(timestamp);
         donListVo.setSign(sign);
 
-        if (donListVo.getWayCode() == null || "".equals(donListVo.getWayCode())) {
-            return ResultBean.result(ResultBean.FAIL, "捐赠渠道编码必录");
-        }
-
         if (donListVo.getDonName() == null || "".equals(donListVo.getDonName())) {
             return ResultBean.result(ResultBean.FAIL, "捐赠人名称必录");
         }
 
-        if (donListVo.getDonDate() == null || "".equals(donListVo.getDonDate())) {
-            return ResultBean.result(ResultBean.FAIL, "捐赠日期为空");
+        if (donListVo.getStartDate() == null || "".equals(donListVo.getStartDate())) {
+            return ResultBean.result(ResultBean.FAIL, "捐赠开始日期为空");
+        }
+
+        if (donListVo.getEndDate() == null || "".equals(donListVo.getEndDate())) {
+            return ResultBean.result(ResultBean.FAIL, "捐赠结束日期为空");
         }
 
         if (donListVo.getDonAmount() == null) {
@@ -139,6 +140,18 @@ public class K3WebApiServiceImpl implements K3WebApiService {
         invoiceAppVo.setTimestamp(timestamp);
         invoiceAppVo.setSign(sign);
 
+        List<InvoiceDonlistVo> invoiceDonlistVos = invoiceAppVo.getInvoiceDonlistVos();
+
+        ResultBean resultBean1 = checkInvoiceDonListField(invoiceDonlistVos);
+
+        if (resultBean1.getCode() == ResultBean.FAIL) {
+            return resultBean1;
+        }
+
+        if (invoiceDonlistVos == null || invoiceDonlistVos.size() == 0) {
+            return ResultBean.result(ResultBean.FAIL, "捐赠明细必选");
+        }
+
         try {
             String jsonMessage = JSONObject.toJSON(invoiceAppVo).toString();
             log.info("项目新增参数" + jsonMessage);
@@ -188,4 +201,38 @@ public class K3WebApiServiceImpl implements K3WebApiService {
         return JSON.parseObject(returnEntity, K3ResultBean.class);
     }
 
+    /**
+     * 校验开票捐赠明细里面的字段都有值
+     * @param invoiceDonlistVos invoiceDonlistVos
+     * @return ResultBean
+     */
+    private ResultBean checkInvoiceDonListField(List<InvoiceDonlistVo> invoiceDonlistVos) {
+
+        if (invoiceDonlistVos == null || invoiceDonlistVos.size() == 0) {
+            return ResultBean.result(ResultBean.FAIL, "开票申请，捐赠明细为空");
+        }
+
+        boolean b = invoiceDonlistVos.stream().anyMatch(item -> (item.getDonDate() == null ||
+                "".equals(item.getDonDate())));
+
+        if (b) {
+            return ResultBean.result(ResultBean.FAIL, "开票申请，捐赠明细集合中有捐赠日期为空的数据");
+        }
+
+        boolean b1 = invoiceDonlistVos.stream().anyMatch(item -> (item.getDonName() == null ||
+                "".equals(item.getDonName())));
+
+        if (b1) {
+            return ResultBean.result(ResultBean.FAIL, "开票申请，捐赠明细集合中有捐赠人姓名为空的数据");
+        }
+
+        boolean b2 = invoiceDonlistVos.stream().anyMatch(item -> (item.getTransNo() == null ||
+                "".equals(item.getTransNo())));
+
+        if (b2) {
+            return ResultBean.result(ResultBean.FAIL, "开票申请，捐赠明细集合中有交易流水号为空的数据");
+        }
+
+        return ResultBean.result(ResultBean.SUCCESS);
+    }
 }

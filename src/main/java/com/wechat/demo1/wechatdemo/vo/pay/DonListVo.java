@@ -33,9 +33,14 @@ public class DonListVo {
     private String donName;
 
     /**
-     * 捐赠日期
+     * 捐赠开始日期
      */
-    private String donDate;
+    private String startDate;
+
+    /**
+     * 捐赠结束日期
+     */
+    private String endDate;
 
     /**
      * 捐赠金额

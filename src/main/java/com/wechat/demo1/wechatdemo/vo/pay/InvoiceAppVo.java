@@ -2,13 +2,16 @@ package com.wechat.demo1.wechatdemo.vo.pay;
 
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * @Description TODO
  * @Auther Administrator
  * @Date 2021/4/23 15:57
  */
 @Data
-public class InvoiceAppVo {
+public class InvoiceAppVo implements Serializable {
 
     /**
      * 时间戳
@@ -68,5 +71,5 @@ public class InvoiceAppVo {
     /**
      * 捐赠明细
      */
-    private InvoiceDonlistVo invoiceDonlistVo;
+    private List<InvoiceDonlistVo> invoiceDonlistVos;
 }
